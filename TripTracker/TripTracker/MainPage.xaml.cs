@@ -48,5 +48,10 @@ namespace TripTracker
 
             trips.ItemsSource = items;
         }
-	}
+
+        private void ToolbarItem_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new NewEntryPage());
+        }
+    }
 }
