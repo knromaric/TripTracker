@@ -4,11 +4,12 @@
              xmlns:local="clr-namespace:TripTracker"
              x:Class="TripTracker.MainPage">
 
-    <StackLayout>
-        <!-- Place new controls here -->
-    	<Label Text="Welcome to Xamarin.Forms!" 
-           HorizontalOptions="Center"
-           VerticalOptions="CenterAndExpand" />
-    </StackLayout>
+    <ListView x:Name="trips">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <TextCell Text="{Binding Title}" Detail="{Binding Notes}"/>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
 
 </ContentPage>
