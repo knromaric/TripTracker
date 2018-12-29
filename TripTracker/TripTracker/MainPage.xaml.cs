@@ -53,5 +53,14 @@ namespace TripTracker
         {
             Navigation.PushAsync(new NewEntryPage());
         }
+
+        private async void trips_ItemTapped(object sender, ItemTappedEventArgs e)
+        {
+            var trip = (TripTrackerEntry)e.Item;
+
+            await Navigation.PushAsync(new DetailPage(trip));
+
+            trips.SelectedItem = null;
+        }
     }
 }

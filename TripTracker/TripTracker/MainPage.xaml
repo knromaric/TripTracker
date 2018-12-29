@@ -7,7 +7,7 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="New" Clicked="ToolbarItem_Clicked"/>
     </ContentPage.ToolbarItems>
-    <ListView x:Name="trips">
+    <ListView x:Name="trips" ItemTapped="trips_ItemTapped">
         <ListView.ItemTemplate>
             <DataTemplate>
                 <TextCell Text="{Binding Title}" Detail="{Binding Notes}"/>
