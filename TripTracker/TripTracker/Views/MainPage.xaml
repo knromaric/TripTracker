@@ -2,12 +2,12 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:TripTracker"
-             x:Class="TripTracker.MainPage"
+             x:Class="TripTracker.Views.MainPage"
              Title="TripTracker">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="New" Clicked="ToolbarItem_Clicked"/>
     </ContentPage.ToolbarItems>
-    <ListView x:Name="trips" ItemTapped="trips_ItemTapped">
+    <ListView x:Name="Trips" ItemTapped="Trips_ItemTapped" ItemsSource="{Binding TripEntries}">
         <ListView.ItemTemplate>
             <DataTemplate>
                 <TextCell Text="{Binding Title}" Detail="{Binding Notes}"/>
