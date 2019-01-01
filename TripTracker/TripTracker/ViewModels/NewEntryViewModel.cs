@@ -87,7 +87,7 @@ namespace TripTracker.ViewModels
             Rating = 1; 
         }
 
-        Command _saveCommand; 
+        private Command _saveCommand; 
         public Command SaveCommand
         {
             get

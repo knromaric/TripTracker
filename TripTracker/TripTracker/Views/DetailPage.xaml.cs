@@ -32,11 +32,6 @@ namespace TripTracker.Views
                 Label = _vm.Entry.Title,
                 Position = new Position(_vm.Entry.Latitude, _vm.Entry.Longitude)
             });
-
-            //title.Text = entry.Title;
-            //date.Text = entry.Date.ToString("M");
-            //rating.Text = $"{entry.Rating} star rating";
-            //notes.Text = entry.Notes;
         }
 	}
 }
