@@ -1,4 +1,6 @@
 using System;
+using TripTracker.Services;
+using TripTracker.ViewModels;
 using TripTracker.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -12,7 +14,14 @@ namespace TripTracker
 		{
 			InitializeComponent();
 
-			MainPage = new NavigationPage(new MainPage());
+			var mainPage = new NavigationPage(new MainPage());
+            var navService = DependencyService.Get<INavService>() as XamarinFormsNavService;
+            navService.XamarinFormsNav = mainPage.Navigation;
+            navService.RegisterViewMapping(typeof(MainViewModel), typeof(MainPage));
+            navService.RegisterViewMapping(typeof(DetailViewModel), typeof(DetailPage));
+            navService.RegisterViewMapping(typeof(NewEntryViewModel), typeof(NewEntryPage));
+
+            MainPage = mainPage;
 		}
 
 		protected override void OnStart ()

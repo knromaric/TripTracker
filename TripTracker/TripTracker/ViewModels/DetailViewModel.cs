@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using TripTracker.Models;
+using TripTracker.Services;
 
 namespace TripTracker.ViewModels
 {
-    public class DetailViewModel: BaseViewModel
+    public class DetailViewModel: BaseViewModel<TripTrackerEntry>
     {
         private TripTrackerEntry _entry; 
 
@@ -19,9 +21,14 @@ namespace TripTracker.ViewModels
             }
         }
 
-        public DetailViewModel(TripTrackerEntry entry)
+        public DetailViewModel(INavService navService): base(navService)
         {
-            Entry = entry;
+
+        }
+
+        public override async Task Init(TripTrackerEntry entry)
+        {
+            _entry = entry;
         }
     }
 }

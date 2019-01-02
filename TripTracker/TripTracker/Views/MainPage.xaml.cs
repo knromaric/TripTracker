@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TripTracker.Models;
+using TripTracker.Services;
 using TripTracker.ViewModels;
 using Xamarin.Forms;
 
@@ -11,11 +12,16 @@ namespace TripTracker.Views
 {
 	public partial class MainPage : ContentPage
 	{
-		public MainPage()
+        private MainViewModel _vm
+        {
+            get { return BindingContext as MainViewModel; }
+        }
+
+        public MainPage()
 		{
 			InitializeComponent();
 
-			BindingContext = new MainViewModel();
+			BindingContext = new MainViewModel(DependencyService.Get<INavService>());
 		}
 
 		private void ToolbarItem_Clicked(object sender, EventArgs e)
@@ -27,9 +33,19 @@ namespace TripTracker.Views
 		{
 			var trip = (TripTrackerEntry)e.Item;
 
-			await Navigation.PushAsync(new DetailPage(trip));
+            _vm.ViewCommand.Execute(trip);
 
-			Trips.SelectedItem = null;
+            Trips.SelectedItem = null;
 		}
-	}
+
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+
+            //Initialize MainViewModel
+
+            if (_vm != null)
+                await _vm.Init();
+        }
+    }
 }

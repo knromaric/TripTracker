@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using TripTracker.Models;
+using TripTracker.Services;
 using Xamarin.Forms;
 
 namespace TripTracker.ViewModels
@@ -81,7 +83,7 @@ namespace TripTracker.ViewModels
             }
         }
 
-        public NewEntryViewModel()
+        public NewEntryViewModel(INavService navService):base(navService)
         {
             Date = DateTime.Today;
             Rating = 1; 
@@ -92,11 +94,11 @@ namespace TripTracker.ViewModels
         {
             get
             {
-                return _saveCommand ?? (_saveCommand = new Command(ExecuteSaveCommand, CanSave));
+                return _saveCommand ?? (_saveCommand = new Command(async () => await ExecuteSaveCommand(), CanSave));
             }
         }
 
-        void ExecuteSaveCommand()
+        private async Task ExecuteSaveCommand()
         {
             var newItem = new TripTrackerEntry
             {
@@ -106,9 +108,11 @@ namespace TripTracker.ViewModels
                 Date = Date,
                 Rating = Rating,
                 Notes = Notes
-            }; 
+            };
 
             //TODO : PERSIST ENTRY IN DATABASE LATER
+
+            await NavService.GoBack();
         }
 
         bool CanSave()
@@ -116,6 +120,9 @@ namespace TripTracker.ViewModels
             return !string.IsNullOrWhiteSpace(Title);
         }
 
-
+        public override Task Init()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
